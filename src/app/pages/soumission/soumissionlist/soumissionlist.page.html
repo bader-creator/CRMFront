@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="home-results"></ion-back-button>
+
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">Soumission</ion-text>
+        </ion-text>
+    </ion-title>
+  
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+    <ion-searchbar [(ngModel)]="search" ></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="light" >
+        <ion-icon name="options"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="grey">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText=""
+      refreshingSpinner="circles"
+     >
+    </ion-refresher-content>
+  </ion-refresher>
+  
+<br>
+
+<div *ngIf="list.length != 0 ">
+ <div  *ngFor="let con of list" >
+   <ion-list *ngIf="showable(con.title,search)" (click)="presentModal(con.id)" >
+     <ion-card>
+<ion-item    >
+  <ion-avatar slot="start">
+    <img src="assets/img/soumission.png" class="user-avatar">
+  </ion-avatar>
+  <ion-label >
+    <ion-text >
+      <h2>
+        <strong>{{con.title}}</strong>
+      </h2>
+    </ion-text>
+    <ion-text color="secondary">
+      <h3>
+        {{con.adresseDepot}}
+      </h3>
+    </ion-text>
+   
+  </ion-label>
+</ion-item>
+
+
+
+
+
+</ion-card>
+</ion-list>
+</div></div>
+<div  align="center" color="secondary" *ngIf="empty">no Project </div>
+ 
+</ion-content>

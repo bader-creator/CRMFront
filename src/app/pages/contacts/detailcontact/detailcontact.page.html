@@ -1,0 +1,363 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons  slot="start">
+
+      <ion-button size="small" shape="round" (click)="close()" [disabled]="leave" color="primary">
+        <ion-icon slot="start" name="close"></ion-icon> 
+        
+      </ion-button>
+       <b>{{ contactrec.fullname }}</b>
+  </ion-buttons>
+      <ion-buttons  slot="end">
+
+        <ion-button *ngIf="!read" size="small" shape="round" [disabled]="leave"  (click)="presentActionSheet()" color="primary">
+   
+          <svg class="bi bi-three-dots-vertical" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" clip-rule="evenodd"/>
+          </svg>  
+        
+         
+        </ion-button> 
+
+        <ion-button *ngIf="read" [disabled]="canleave()" size="small" shape="round"  color="primary" (click)="update()" >
+   
+          <svg class="bi bi-check" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+          </svg>
+         
+        </ion-button>
+
+  </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" padding>
+  <div align="center">
+  <img shape="round"  style="width: 30% ; height: 30%;"  src="assets/img/contact.png"/>
+</div> <br>
+  <ion-list-header >
+    <ion-label class="fw700">basic infos</ion-label>
+    
+  </ion-list-header>
+  <br>
+    
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+             <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="person"></ion-icon>fullname</ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-input value="{{ contactrec.fullname }}" [readonly]="!read" [(ngModel)]="updated.fullname"  placeholder="contact fullname" type="text"></ion-input>
+    </ion-row>
+       
+    <hr  *ngIf="read" [color]="nomcol()">
+    <ion-label *ngIf="this.updated.fullname ==='' " color="danger">required field</ion-label>
+  </ion-grid>
+  
+
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+         <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="logo-usd"></ion-icon>Contact type </ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+<ion-row>
+ 
+  <ion-input  *ngIf="!read" value="{{ contactrec.natureDeContact }}" [readonly]="!read" type="text"></ion-input>
+
+
+<ion-select *ngIf="read" style="font-size: large;" [(ngModel)]="updated.natureDeContact" placeholder="Contact type" value="{{ contactrec.natureDeContact }}"  >
+
+  <ion-select-option value="agent">agent</ion-select-option>
+  <ion-select-option value="apporteur de projet">apporteur de projet</ion-select-option>
+  <ion-select-option value="partenaire">partenaire</ion-select-option>
+  <ion-select-option value="client">client</ion-select-option>
+  <ion-select-option value="prospect">prospect</ion-select-option>
+  
+  
+
+</ion-select>
+
+</ion-row>
+     
+  
+<hr  *ngIf="read" color="black">
+  </ion-grid>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+             <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="business"></ion-icon>Organisme</ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-input value="{{ contactrec.organisme }}" [readonly]="!read" [(ngModel)]="updated.organisme"  [placeholder]="orgph" type="text"></ion-input>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+             <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="ribbon"></ion-icon>fonction</ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-input value="{{ contactrec.fonction }}" [readonly]="!read" [(ngModel)]="updated.fonction"  [placeholder]="fonph" type="text"></ion-input>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid>
+  
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+             <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="mail"></ion-icon>mail</ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-input value="{{ contactrec.mail }}" [readonly]="!read" [(ngModel)]="updated.mail"  [placeholder]="mailph" type="text"></ion-input>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid> 
+
+
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+             <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="mail"></ion-icon>mail 2 </ion-label>
+ 
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-input value="{{ contactrec.mail2 }}" [readonly]="!read" [(ngModel)]="updated.mail2"  [placeholder]="mailph" type="text"></ion-input>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid>
+
+
+  
+
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+             <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="call"></ion-icon>tel</ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-input value="{{ contactrec.tel }}" [readonly]="!read" [(ngModel)]="updated.tel"  [placeholder]="telph" type="text"></ion-input>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid> 
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+             <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="call"></ion-icon>tel 1 </ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-input value="{{ contactrec.tel1 }}" [readonly]="!read" [(ngModel)]="updated.tel1"  [placeholder]="telph" type="text"></ion-input>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+             <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="call"></ion-icon>tel2</ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-input value="{{ contactrec.tel2 }}" [readonly]="!read" [(ngModel)]="updated.tel2"  [placeholder]="telph" type="text"></ion-input>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid>
+
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+             <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="map"></ion-icon>pays</ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-input value="{{ contactrec.pays }}" [readonly]="!read" [(ngModel)]="updated.pays"  [placeholder]="payph" type="text"></ion-input>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid>
+
+ 
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+             <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="home"></ion-icon>adresse</ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-input value="{{ contactrec.adresse }}" [readonly]="!read" [(ngModel)]="updated.adresse"  [placeholder]="adrph" type="text"></ion-input>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid>
+
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+         <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="Calendar"></ion-icon>birth Date</ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-datetime value="{{ contactrec.dateDeNaissance }}" [readonly]="!read" [(ngModel)]="updated.dateDeNaissance" display-format="MMM DD, YYYY" picker-format="YYYY-MM-DD" [placeholder]="birph"></ion-datetime>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid>
+   
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+         <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="briefcase"></ion-icon>Cadre de rencontre</ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-textarea value="{{ contactrec.cadreDeRencontre }}" [readonly]="!read" style="font:red"  [placeholder]="cadph"  [(ngModel)]="updated.cadreDeRencontre" rows="3" cols="20" ></ion-textarea>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid> 
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="11">
+         <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="document"></ion-icon>commentaire</ion-label>
+
+      </ion-col >
+            
+    
+      <ion-col  *ngIf="read" size="1">
+           <ion-icon name="create"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>    
+      <ion-textarea value="{{ contactrec.commentaire }}" [readonly]="!read" style="font:red"  [placeholder]="commph"  [(ngModel)]="updated.commentaire" rows="3" cols="20" ></ion-textarea>
+    </ion-row>
+       
+    <hr  *ngIf="read" color="black">
+  </ion-grid> 
+
+
+  <ion-list-header >
+    <ion-label class="fw700">Social media</ion-label>
+    
+
+
+    
+  </ion-list-header>
+  <br><br>
+  <ion-input  value="{{ contactrec.facebook }}" [readonly]="!read"  [(ngModel)]="updated.facebook" type="text"><ion-icon style="margin-right:7px" name="logo-facebook"></ion-icon></ion-input>  <hr  *ngIf="read" color="black">
+  <ion-input  value="{{ contactrec.twitter }}"  [readonly]="!read"  [(ngModel)]="updated.twitter" type="text"><ion-icon style="margin-right:7px" name="logo-twitter"></ion-icon></ion-input> <hr  *ngIf="read" color="black">
+  <ion-input  value="{{ contactrec.linkedin }}" [readonly]="!read"  [(ngModel)]="updated.linkedin" type="text"><ion-icon style="margin-right:7px" name="logo-linkedin"></ion-icon></ion-input> <hr  *ngIf="read" color="black">
+  <ion-input  value="{{ contactrec.viadio }}"   [readonly]="!read"  [(ngModel)]="updated.viadio" type="text"><ion-icon style="margin-right:7px" name="logo-vimeo"></ion-icon></ion-input> <hr  *ngIf="read" color="black">
+   
+  
+ </ion-content>

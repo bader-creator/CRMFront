@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons  slot="start">
+
+      <ion-button size="small" shape="round" (click)="close()"  color="light">
+        <ion-icon slot="start" name="close"></ion-icon> 
+        
+      </ion-button> 
+      </ion-buttons>
+      <ion-label><b>Localisation</b></ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>  
+  <ion-input  [(ngModel)]="lnginput" placeholder="enter longitude" type="number" ><b>longitude :</b> </ion-input>
+  <ion-input   [(ngModel)]="latinput" placeholder="enter latitude" type="number"><b>latitude : </b></ion-input>
+  <ion-button  style="float: right;"(click)="reload(lnginput,latinput)">        <ion-icon style=" margin-right:10px;"name="locate"></ion-icon>
+    locate</ion-button>
+  <div id="map_canvas"></div>
+</ion-content>

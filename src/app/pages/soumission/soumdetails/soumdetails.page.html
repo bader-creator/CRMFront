@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons  slot="start">
+
+      <ion-button size="small" shape="round" (click)="close()"   color="primary">
+        <ion-icon slot="start" name="close"></ion-icon> 
+        
+      </ion-button>
+       <b>Soumission</b>
+  </ion-buttons>
+      <ion-buttons  slot="end">
+
+        <ion-button  size="small" shape="round"  (click)="presentActionSheet()" color="primary">
+   
+          <svg class="bi bi-three-dots-vertical" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" clip-rule="evenodd"/>
+          </svg>  
+        
+         
+        </ion-button> 
+
+       
+
+  </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" padding>
+  
+
+  <ion-card style="padding:5%"><div align="center">    <img src="assets/img/soumission.png" style="width: 60%;" />
+</div>
+    <ion-card-header>
+      <ion-card-subtitle>Soumission : </ion-card-subtitle>
+      <ion-card-title>{{  list.title }}</ion-card-title>
+    </ion-card-header>
+    <br>
+    <ion-card-content>
+     <ion-icon name="document"></ion-icon> {{  list.description }}   
+      <br><br>
+       <ion-label>adresse Depot : </ion-label> <br> {{list.adresseDepot}} <br><br>
+       <ion-label>Durée mission : </ion-label> <br> {{list.dureeMission}} <br><br>
+       <ion-label>Date publication : </ion-label> <br> {{list.datePublication}} <br><br>
+       <ion-label>Date Soumission : </ion-label> <br> {{list.dateSoumission}} <br><br>
+
+       <ion-label>Date Creation : </ion-label> <br> {{list.dateCreation}} <br><br>
+
+       <ion-label>Date Debut : </ion-label> <br> {{list.dateDebut}} <br><br>
+
+       <ion-label>Date Fin : </ion-label> <br> {{list.dateFin}} <br><br> 
+       <ion-label>Path : </ion-label> <br> {{list.path}} <br><br> 
+       <ion-label>isTuneps : </ion-label> <br> {{tuneps}} <br><br>
+
+
+
+
+
+      
+      
+      
+      </ion-card-content>
+  </ion-card>
+
+     
+       
+
+
+
+  </ion-content>
