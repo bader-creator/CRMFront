@@ -1,0 +1,13 @@
+<br>
+<br>
+
+<ion-content>
+   <div  *ngFor="let for of listformation">
+  <ion-item>
+    <ion-label>{{ for.titre }}</ion-label> 
+    <ion-button>edit</ion-button> <ion-button (click)="delete(for.id)">delete</ion-button>
+  </ion-item>
+  <br>
+  </div>
+
+</ion-content>

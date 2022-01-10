@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons  slot="start">
+
+      <ion-button size="small" shape="round" (click)="close()"   color="light">
+        <ion-icon slot="start" name="close"></ion-icon> 
+        
+      </ion-button>
+       <b>{{name}}</b>
+  </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="addmarker()">
+              <ion-icon name="md-locate"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="map" style="width:100%; height:100%;"></div>
+</ion-content>

@@ -1,0 +1,357 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons  slot="start">
+
+      <ion-button size="small" shape="round" (click)="dismiss()" [disabled]="leave" color="primary">
+        <ion-icon slot="start" name="close"></ion-icon> 
+      
+      </ion-button>
+       <b >{{oppdet.nomaffaire}}</b>
+  </ion-buttons>
+      <ion-buttons  slot="end" *ngIf="this?.user?.id == oppdet.createur.id">
+
+        <ion-button *ngIf="!read" size="small" shape="round" [disabled]="leave"  (click)="presentActionSheet()" color="primary">
+   
+          <svg class="bi bi-three-dots-vertical" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" clip-rule="evenodd"/>
+          </svg>  
+        
+         
+        </ion-button> 
+
+        <ion-button *ngIf="read" size="small" shape="round"  color="primary" (click)="updateopp(oppdet.id)" [disabled]="canleave()">
+   
+          <svg class="bi bi-check" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+          </svg>
+         
+        </ion-button>
+
+  </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+  
+   
+
+<ion-content padding>  
+
+  <ion-label color="secondary" floating>créé le {{  datecr  }}</ion-label>
+<br><br>
+
+  <div align="center">
+    <img shape="round"  style="width: 40% ; height: 40%;"  src="assets/img/oppav.jfif"/>
+  </div> <br>
+
+
+  <ion-list-header >
+    <ion-label class="fw700">Infos</ion-label>
+    
+  </ion-list-header>
+  <br>
+
+
+ 
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11">
+          <ion-label  position="floating"><svg style="margin-right: 7px;;" class="bi bi-card-heading" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+           <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h13a.5.5 0 00.5-.5v-9a.5.5 0 00-.5-.5zm-13-1A1.5 1.5 0 000 3.5v9A1.5 1.5 0 001.5 14h13a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0014.5 2h-13z" clip-rule="evenodd"/>
+           <path fill-rule="evenodd" d="M3 8.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm0 2a.5.5 0 01.5-.5h6a.5.5 0 010 1h-6a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+           <path d="M3 5.5a.5.5 0 01.5-.5h9a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-9a.5.5 0 01-.5-.5v-1z"/>
+         </svg>Intitulé de l'affaire  </ion-label>
+
+   </ion-col >
+              
+      
+        <ion-col  *ngIf="read" size="1">
+             <ion-icon name="create"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>    
+        <ion-input value="{{oppdet.nomaffaire}}" style="font-size: large;" [placeholder]="nomph"  [readonly]="!read" [(ngModel)]="updated.nomaffaire" type="text"></ion-input>
+      </ion-row>
+         
+     
+         
+      <hr  *ngIf="read" [color]="nomcol()">
+      <ion-label *ngIf="this.updated.nomaffaire ===''" color="danger">required field</ion-label>
+    </ion-grid>
+
+
+
+
+
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11">
+               <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="people"></ion-icon>Prospect</ion-label>
+
+        </ion-col>
+              
+      
+        <ion-col  *ngIf="read" size="1">
+             <ion-icon name="create"></ion-icon>
+        </ion-col>
+      </ion-row>
+     
+         
+      <ion-row>
+        
+       <div *ngIf="!read"> <ion-text style="font-size: large;"> {{oppdet.cprospect}}  </ion-text></div>
+   
+       <div *ngIf="read" >
+          
+<ion-item>
+  <select class="custom-select" [(ngModel)]="updated.cprospect" name="updated.cprospect">
+    <option *ngFor="let item of ports" [value]="item?.fullname">{{item.fullname}}</option>
+  </select>
+</ion-item>
+      </div>
+      </ion-row>
+
+
+
+      <hr  *ngIf="read" color="black">
+    </ion-grid>
+
+    <br>
+
+
+    
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11">
+           <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="analytics"></ion-icon>Etat</ion-label>
+
+        </ion-col >
+              
+      
+        <ion-col  *ngIf="read" size="1">
+             <ion-icon name="create"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+<ion-row>
+  <div *ngIf="!read" > <ion-text style="font-size: large;"> {{oppdet.etape}}  </ion-text></div>
+  
+  <div *ngIf="read">
+  <ion-select style="font-size: large;" placeholder="choose a step"  value="{{oppdet.etape}}" [(ngModel)]="updated.etape" >
+    <ion-select-option value="Prise de rendez vous">Prise de rendez vous</ion-select-option>
+    <ion-select-option value="Présentation du produit">Présentation du produit</ion-select-option>
+    <ion-select-option value="Démo live">Démo live</ion-select-option>
+    <ion-select-option value="POC">POC</ion-select-option>
+    <ion-select-option value="Proposition budgétaire">Proposition budgétaire</ion-select-option>
+    <ion-select-option value="AMI">AMI</ion-select-option>
+    <ion-select-option value="AO">AO</ion-select-option>
+    <ion-select-option value="Contrat">Contrat</ion-select-option>
+    <ion-select-option value="Perdu">Perdu</ion-select-option>
+  
+  </ion-select>
+</div>
+</ion-row>
+       
+    
+         
+      <hr  *ngIf="read" color="black">
+    </ion-grid>
+<br>
+      
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11">
+           <ion-label   position="floating"><ion-icon style="margin-right: 7px;"   name="Calendar"></ion-icon>Date d'échéance </ion-label>
+
+        </ion-col >
+              
+      
+        <ion-col  *ngIf="read" size="1">
+             <ion-icon name="create"></ion-icon>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-row>    
+          <ion-input value="{{ oppdet.dateecheance  }}" [readonly]="!read" [(ngModel)]="updated.dateecheance"  [placeholder]="birph" type="date"></ion-input>
+        </ion-row>
+      </ion-row>       
+  
+
+      <hr  *ngIf="read" color="black">
+    </ion-grid> 
+ 
+
+ 
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11">
+           <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="logo-usd"></ion-icon>Devise</ion-label>
+
+        </ion-col >
+              
+      
+        <ion-col  *ngIf="read" size="1">
+             <ion-icon name="create"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+<ion-row>
+   
+  <div *ngIf="!read"> <ion-text style="font-size: large;"> {{oppdet.devise}}  </ion-text></div>
+
+  <div *ngIf="read" >
+  <ion-select style="font-size: large;" [(ngModel)]="updated.devise" placeholder="choisir une unité monétaire"  value="{{oppdet.devise}}" >
+  
+    <ion-select-option value="dinnar">Dinnar</ion-select-option>
+    <ion-select-option value="dollar">Dollar</ion-select-option>	
+    <ion-select-option value="euro">Euro</ion-select-option>	
+  
+  </ion-select>
+</div>
+</ion-row>
+       
+    
+         
+      <hr  *ngIf="read" color="black">
+    </ion-grid>
+
+
+  <br>
+
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11">
+               <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="logo-usd"></ion-icon>Montant</ion-label>
+
+        </ion-col>
+              
+      
+        <ion-col  *ngIf="read" size="1">
+             <ion-icon name="create"></ion-icon>
+        </ion-col>
+      </ion-row>
+     
+         
+      <ion-row>    
+        <ion-input value="{{oppdet.montant}}" style="font-size: large;" [(ngModel)]="updated.montant" [placeholder]="montantph"  [readonly]="!read"  type="text"></ion-input>
+      </ion-row>
+      <hr  *ngIf="read" color="black">
+    </ion-grid>
+
+  
+   
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11">
+               <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="trending-up"></ion-icon>Priorité</ion-label>
+
+        </ion-col>
+              
+      
+        <ion-col  *ngIf="read" size="1">
+             <ion-icon name="create"></ion-icon>
+        </ion-col>
+      </ion-row>
+     
+         
+      <ion-row>    
+        <ion-input value="{{oppdet.proba}}"  [(ngModel)]="updated.proba"  style="font-size: large;" [placeholder]="probaph"   [readonly]="!read"  type="text"></ion-input>
+      </ion-row>
+      <hr  *ngIf="read" color="black">
+    </ion-grid>
+
+
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11">
+               <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="business"></ion-icon>Oragnisme</ion-label>
+
+        </ion-col>
+              
+      
+        <ion-col  *ngIf="read" size="1">
+             <ion-icon name="create"></ion-icon>
+        </ion-col>
+      </ion-row>
+     
+         
+      <ion-row>    
+        <ion-input value="{{oppdet.societe}}" [(ngModel)]="updated.societe" style="font-size: large;" [placeholder]="socph"  [readonly]="!read"  type="text"></ion-input>
+      </ion-row>
+      <hr  *ngIf="read" color="black">
+    </ion-grid>
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11">
+           <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="briefcase"></ion-icon>Source d'opportunité</ion-label>
+
+        </ion-col >
+              
+      
+        <ion-col  *ngIf="read" size="1">
+             <ion-icon name="create"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+<ion-row>
+   
+  <div *ngIf="!read"> <ion-text style="font-size: large;"> {{oppdet.source}}  </ion-text></div>
+
+  <div *ngIf="read" >
+  <ion-select style="font-size: large;" [(ngModel)]="updated.source"  value="{{oppdet.source}}" placeholder="Source d'opportunité" >
+
+    <ion-select-option value="magazine">magazine </ion-select-option>
+    <ion-select-option value="event">event</ion-select-option>     
+    <ion-select-option value="autres">Autres</ion-select-option> 
+  
+  </ion-select>
+</div>
+</ion-row>
+       
+    
+         
+      <hr  *ngIf="read" color="black">
+    </ion-grid>
+
+<br>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11">
+           <ion-label   position="floating"><ion-icon style="margin-right: 7px;"  name="document"></ion-icon>Note</ion-label>
+
+        </ion-col >
+              
+      
+        <ion-col  *ngIf="read" size="1">
+             <ion-icon name="create"></ion-icon>
+        </ion-col>
+      </ion-row>
+    <ion-row>      <ion-textarea value="{{oppdet.brief}}" [(ngModel)]="updated.brief" style="font-size: large;" [placeholder]="briefph"  [readonly]="!read"   rows="3" cols="20" ></ion-textarea>
+    </ion-row>
+         
+      <hr  *ngIf="read" color="black">
+    </ion-grid> 
+  
+
+    <br>
+
+
+<blockquote  align="left" *ngFor="let com of oppdet.comments"  class="speech-bubble">
+  <p>{{com}}</p>
+</blockquote>
+<blockquote  align="left" *ngFor="let com of oppdet.notes"  class="speech-bubble-notes">
+  <p>{{com}}</p>
+</blockquote>
+
+</ion-content>

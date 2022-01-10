@@ -1,0 +1,21 @@
+.sll {
+  --ion-item-background: white;
+}
+
+$colors: (
+ blue:    #387ef5,
+ secondary:  #32db64,
+ danger:     #f53d3d,
+ light:      #f4f4f4,  
+ dark:          #222 
+);
+.tool{
+--background: darkgray ;
+}
+ion-card{
+margin-bottom: 2px;; 
+}
+.sll:hover{
+--ion-item-background: darkgray;
+
+}

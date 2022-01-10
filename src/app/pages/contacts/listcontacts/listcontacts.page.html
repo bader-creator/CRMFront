@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="back()" defaultHref="home-results"></ion-back-button>
+
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">Contact</ion-text>
+        </ion-text>
+    </ion-title>
+  
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+    <ion-searchbar (ionBlur)="closesitem()" (ionChange)="closesitem()" (ionFocus)="closesitem()" [(ngModel)]="search" ></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="light" >
+        <ion-icon name="options"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="grey">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText=""
+      refreshingSpinner="circles"
+     >
+    </ion-refresher-content>
+  </ion-refresher>
+<br>
+
+<div *ngIf="lisctcontact.length != 0 ">
+ <div  *ngFor="let con of lisctcontact">
+   <ion-list #dynamicList *ngIf="showable(con.fullname,search)" >
+     <ion-card>
+<ion-item-sliding #slidingItem class="sll"   >
+<ion-item class="sll" (click)="presentModal(con.id , slidingItem ,false )"  >
+  <ion-avatar slot="start">
+    <img src="assets/img/contact.png" class="user-avatar">
+  </ion-avatar>
+  <ion-label >
+    <ion-text >
+      <h2>
+        <strong>{{con.fullname}}</strong>
+      </h2>
+    </ion-text>
+    <ion-text color="secondary">
+      <h3>
+        {{con.nature_de_contact}}
+      </h3>
+    </ion-text>
+
+    <ion-text color="secondary">
+      <h5>
+        {{con.createur.username}}
+      </h5>
+    </ion-text>
+   
+  </ion-label>
+</ion-item>
+
+<ion-item-options *ngIf="this?.user?.id == con.createur.id" style="background: lightgrey;  margin-left: 5px;" class="sll" side="end">
+
+<ion-item-option (click)="presentModal(con.id , slidingItem ,true )" large style=" margin-left: 10px; background: lightgrey;" ><ion-icon style=" font-size: 25px; color: black;" name="create"></ion-icon></ion-item-option>
+<ion-item-option (click)="remove(con.id)"  large style="background: lightgrey;" ><ion-icon style="  font-size: 25px; color: black;" name="trash"></ion-icon></ion-item-option>
+
+</ion-item-options>
+
+
+
+</ion-item-sliding> 
+</ion-card>
+</ion-list>
+</div></div>
+<div  align="center" color="secondary" *ngIf="empty">pas de contact </div>
+ 
+</ion-content>
+
+
+<ion-footer>
+
+  <ion-toolbar >
+
+    <div align="right">
+      <ion-fab-button style="margin-right: 20px;" (click)="gotonewcon()" >
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+   </div>  </ion-toolbar>
+  
+
+</ion-footer>

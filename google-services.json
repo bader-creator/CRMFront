@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "511075558495",
+    "project_id": "crm-sfm",
+    "storage_bucket": "crm-sfm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511075558495:android:aeea483b1495d82c6327ea",
+        "android_client_info": {
+          "package_name": "com.sfm.crm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511075558495-jiqb55fivjjjss188l99nlcc464oioll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAin3nnWa1kuaH0IYtXxOcore-g0pB4TsU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511075558495-jiqb55fivjjjss188l99nlcc464oioll.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

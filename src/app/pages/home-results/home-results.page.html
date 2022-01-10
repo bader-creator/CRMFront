@@ -1,0 +1,188 @@
+<ion-menu side="start" content-id="main-content">
+  <ion-header>
+      <ion-toolbar color="dark" class="user-profile">
+
+          <ion-item margin-bottom>
+              <ion-avatar slot="start" class="user-avatar">
+                  <img src="assets/img/user.png">
+              </ion-avatar>
+              <ion-label>
+                  <ion-text color="medium">
+                      <h1><strong>{{this?.user?.username}}</strong></h1>
+                  </ion-text>
+                  <br>
+
+                  <ion-menu-toggle class="mto" auto-hide="false">
+                      <a class="text08" tappable (click)="goToEditProgile()">
+                          <ion-text color="medium">
+                              <ion-icon name="contact"></ion-icon>
+                              <strong>edit profile</strong>
+                          </ion-text>
+                      </a>
+                      <ion-text color="secondary"> | </ion-text>
+                      <a class="text08" tappable (click)="logout()">
+                          <ion-text color="medium">
+                              <ion-icon name="log-out"></ion-icon>
+                              <strong>logout</strong>
+                          </ion-text>
+                      </a>
+                  </ion-menu-toggle>
+              </ion-label>
+          </ion-item>
+
+      </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="bg-profile">
+      <ion-list>
+          <ion-list-header color="dark">
+              <ion-label>Menu</ion-label>
+          </ion-list-header>
+
+
+
+          <ion-menu-toggle auto-hide="false">
+              <ion-item [routerLink]="'/home-results'" routerDirection="forward"  color="primary">
+                  <ion-icon slot="start" name="home" color="light"></ion-icon>
+                  <ion-label>
+                      Home
+
+                  </ion-label>
+
+              </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+              <ion-item [routerLink]="'/listcontacts'" routerDirection="forward" color="primary">
+                  <ion-icon slot="start" name="person" color="light"></ion-icon>
+                  <ion-label>
+                      Contact
+
+                  </ion-label>
+                  <ion-badge color="secondary" slot="end">{{ nbrcontact }}</ion-badge>
+
+              </ion-item>
+          </ion-menu-toggle>
+
+
+          <ion-menu-toggle auto-hide="false">
+              <ion-item [routerLink]="'/listformations'" routerDirection="forward"  color="primary">
+                  <ion-icon slot="start" name="book" color="light"></ion-icon>
+                  <ion-label>
+                      Formation
+
+                  </ion-label>
+                  <ion-badge color="secondary" slot="end">{{ nbrfor }}</ion-badge>
+
+              </ion-item>
+          </ion-menu-toggle>
+
+
+          <ion-menu-toggle auto-hide="false">
+              <ion-item [routerLink]="'/listopp'" routerDirection="forward"  color="primary">
+                  <ion-icon slot="start" name="logo-buffer" color="light"></ion-icon>
+                  <ion-label>
+                      Opportunities
+
+                  </ion-label>
+                  <ion-badge color="secondary" slot="end">{{ nbropp }}</ion-badge>
+
+
+              </ion-item>
+          </ion-menu-toggle>
+
+
+          <ion-menu-toggle auto-hide="false">
+              <ion-item [routerLink]="'/listproj'" routerDirection="forward"  color="primary">
+                  <ion-icon slot="start" name="albums" color="light"></ion-icon>
+                  <ion-label>
+                      Projects
+
+                  </ion-label>
+
+
+              </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+              <ion-item  [routerLink]="'/soumissionlist'" routerDirection="forward"  color="primary">
+                  <ion-icon slot="start" name="podium" color="light"></ion-icon>
+                  <ion-label>
+                      Soumissions
+
+                  </ion-label>
+
+
+              </ion-item>
+          </ion-menu-toggle>
+
+
+      </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+
+<div id="main-content">
+
+  <ion-header>
+      <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+              <ion-menu-button color="secondary"></ion-menu-button>
+          </ion-buttons>
+          <ion-title>
+              <ion-text color="light">
+                  <ion-text color="light" class="fw700">SFM application</ion-text>
+              </ion-text>
+          </ion-title>
+          <ion-buttons slot="end">
+              <ion-button size="small" shape="round" color="medium" (click)="notifications()">
+                  <ion-icon name="notifications"></ion-icon>
+                  <ion-badge color="dark" slot="end">4</ion-badge>
+              </ion-button>
+          </ion-buttons>
+      </ion-toolbar>
+      <ion-toolbar color="dark">
+          <ion-searchbar [(ngModel)]="searchKey"></ion-searchbar>
+          <ion-buttons slot="end">
+              <ion-button size="small" shape="round" color="medium">
+                  <ion-icon name="options"></ion-icon>
+              </ion-button>
+          </ion-buttons>
+      </ion-toolbar>
+  </ion-header>
+
+
+
+</div>
+
+
+
+
+<ion-content>
+  <ion-card no-margin class="no-radius">
+      <ion-item lines="none" color="medium">
+          <ion-label>
+              <h2 no-margin class="fw500 no-margin">
+                  <ion-text color="dark"><b *ngIf="this?.user?.username">{{this?.user?.username}}</b> </ion-text>
+              </h2>
+
+              <p class="text-11x no-margin">
+                  <ion-text color="primary" *ngIf="this?.user?.email">{{this?.user?.email}}</ion-text>
+              </p>
+          </ion-label>
+          <ion-button shape="round" fill="outline" size="small" color="primary" (click)="presentModal()">
+              Location
+              <ion-icon name="locate"></ion-icon>
+          </ion-button>
+      </ion-item>
+  </ion-card>
+
+  <ion-card class="bg-white">
+      <ion-img src="assets/img/sfmll.png"></ion-img>
+
+  </ion-card>
+
+
+
+</ion-content>

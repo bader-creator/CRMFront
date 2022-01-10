@@ -1,0 +1,13 @@
+<br>
+<br>
+
+<ion-content>
+   <div *ngFor="let con of lisctcontact">
+  <ion-item>
+    <ion-label>{{ con.fullname }}</ion-label> 
+    <ion-button>edit</ion-button> <ion-button (click)="delete(con.id)">delete</ion-button>
+  </ion-item>
+  <br>
+  </div>
+
+</ion-content>

@@ -1,0 +1,134 @@
+<ion-buttons slot="start">
+  <ion-back-button  defaultHref="listcontacts"></ion-back-button>
+</ion-buttons>
+
+
+<ion-content> 
+  <form [formGroup]="onLoginForm" class="list-form">
+
+  
+    <div align="center">
+      <img shape="round"  style="width: 30% ; height: 30%;"  src="assets/img/contact.png"/><br><br>
+    <ion-label><b>New contact</b></ion-label>
+    </div>
+    
+<br>
+
+   <ion-card>  
+    <ion-item >
+      <ion-label position="floating"><ion-icon style="margin-right: 7px;" name="person"></ion-icon><b>Nom Prénom</b></ion-label>
+      <ion-input placeholder="Fullname"  [(ngModel)]="newcontact.fullname" formControlName="fullname" required type="text"></ion-input>
+    </ion-item>
+   </ion-card>
+
+
+
+   <ion-card> <ion-item>
+    <ion-label  position="floating"><ion-icon style="margin-right: 7px;" name="mail" ></ion-icon><b>Email</b></ion-label><ion-icon  (click)="addmail()" slot="end" [name]="mailicon"></ion-icon>
+    <ion-input placeholder="Email" formControlName="mail" [(ngModel)]="newcontact.mail" type="text"></ion-input>
+  </ion-item> 
+  <ion-item *ngIf="addnewmail">
+    <ion-input placeholder="email  2"  formControlName="mail2"  [(ngModel)]="newcontact.mail2" type="text"></ion-input>
+  </ion-item>
+
+</ion-card>
+     
+  <ion-card><ion-item>
+    <ion-label  position="floating"><ion-icon style="margin-right: 7px;" name="call" ></ion-icon><b>Téléphones</b></ion-label><ion-icon  (click)="addnewphones()" slot="end" [name]="phoneicon"></ion-icon>
+    <ion-input placeholder="Phone number"  formControlName="tel"  [(ngModel)]="newcontact.tel" type="number"></ion-input>
+  </ion-item> 
+  <ion-item *ngIf="addnewphone">
+    <ion-input placeholder="Phone number 2"  formControlName="tel1"  [(ngModel)]="newcontact.tel1" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="addnewphone">
+    <ion-input placeholder="Phone number 3"  formControlName="tel2"  [(ngModel)]="newcontact.tel2" type="number"></ion-input>
+  </ion-item>
+</ion-card>
+     
+
+  <ion-card>  <ion-item>
+    <ion-label position="floating"><ion-icon style="margin-right: 7px;" name="business"></ion-icon><b>Organisme</b></ion-label>
+    <ion-input placeholder="organization" formControlName="organisme" [(ngModel)]="newcontact.organisme"  type="text"></ion-input>
+  </ion-item></ion-card>
+
+  <ion-card><ion-item>
+    <ion-label position="floating"><ion-icon style="margin-right: 7px;" name="ribbon"></ion-icon><b>fonction</b></ion-label>
+    <ion-input placeholder="fonction" formControlName="fonction" [(ngModel)]="newcontact.fonction" type="text"></ion-input>
+  </ion-item>
+  </ion-card>
+
+
+  <ion-card>     <ion-item>
+    <ion-label><ion-icon style="margin-right: 7px;" name="calendar"></ion-icon><b>Anniversaire</b>
+    </ion-label>
+    <input class="form-control" type="date"  [(ngModel)]="newcontact.dateDeNaissance" formControlName="date"  placeholder="Select Date" />  
+
+  </ion-item>
+</ion-card>
+  <ion-card>
+  <ion-item>
+    <ion-label position="stacked"><ion-icon name="create"></ion-icon><b>Commentaires</b></ion-label>
+    <ion-textarea formControlName="commentaire" placeholder="add comments" [(ngModel)]="newcontact.commentaire" rows="3" cols="20" ></ion-textarea>
+  </ion-item></ion-card>
+
+
+  <ion-card> <ion-item>
+              <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="map"></ion-icon><b>Pays</b></ion-label>
+              <ion-input formControlName="pays" placeholder="Country" [(ngModel)]="newcontact.pays" type="text"></ion-input>
+            </ion-item></ion-card>
+
+  <ion-card>  <ion-item>
+                <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="home"></ion-icon><b>adresse</b></ion-label>
+                <ion-input formControlName="adresse" placeholder="address" [(ngModel)]="newcontact.adresse" type="text"></ion-input>
+              </ion-item></ion-card>
+
+
+  <ion-card>    <ion-item>
+    <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="map"></ion-icon><b>Nature de Contact</b></ion-label>
+
+      <ion-select  formControlName="nature" [(ngModel)]="newcontact.natureDeContact">
+        <ion-select-option value="agent">Agent </ion-select-option>
+        <ion-select-option value="apporteur d'affaire">Apporteur d'affaire&Partenaire</ion-select-option>
+        <ion-select-option value="apporteur">Apporteur d'affaire</ion-select-option>
+        <ion-select-option value="partenaire">Partenaire</ion-select-option>
+        <ion-select-option value="client">Client</ion-select-option>   
+        <ion-select-option value="prospect">Prospect</ion-select-option>      
+        <ion-select-option value="Lead">Lead</ion-select-option>      
+
+      </ion-select>
+    </ion-item></ion-card> 
+
+
+
+
+    <ion-card><ion-item>
+    
+      <ion-label  position="floating"><ion-icon style="margin-right: 7px;" name="globe" ></ion-icon><b>Les réseaux sociaux</b></ion-label><ion-icon  (click)="addres()" slot="end" [name]="ressocicon"></ion-icon>
+      <ion-input placeholder="Facebook"  formControlName="fb"  [(ngModel)]="newcontact.facebook" type="text"><ion-icon style="margin-right:7px" name="logo-facebook"></ion-icon></ion-input>
+    </ion-item> 
+    <ion-item *ngIf="ressoc">
+      <ion-input placeholder="Twitter"  formControlName="twitt"  [(ngModel)]="newcontact.twitter" type="text"><ion-icon style="margin-right:7px" name="logo-twitter"></ion-icon></ion-input>
+    </ion-item> 
+    <ion-item *ngIf="ressoc">
+      <ion-input placeholder="Linkedin"  formControlName="link"  [(ngModel)]="newcontact.linkedin" type="text"><ion-icon style="margin-right:7px" name="logo-linkedin"></ion-icon></ion-input>
+    </ion-item> 
+    <ion-item *ngIf="ressoc">
+      <ion-input placeholder="Vimeo"  formControlName="vim"  [(ngModel)]="newcontact.viadio" type="text"><ion-icon style="margin-right:7px" name="logo-vimeo"></ion-icon></ion-input>
+    </ion-item> 
+  </ion-card>
+
+
+
+    <ion-card> <ion-item>
+      <ion-label position="stacked"><ion-icon style="margin-right: 7px;" name="briefcase"></ion-icon><b>Nature de rencontre</b></ion-label>
+      <ion-textarea formControlName="cadreDeRencontre" placeholder="event , mission ...." [(ngModel)]="newcontact.cadreDeRencontre" rows="4" cols="20" ></ion-textarea>
+    </ion-item></ion-card>
+       
+     <div align="center">
+    <ion-button (click)="newcontacts()" style=" height: 55px; width:70% ;margin:20px;"   color="dark" [disabled]="!onLoginForm.valid" tappable  no-margin><ion-icon style="margin-right: 10px;;" name="person-add"></ion-icon>Ajouter</ion-button>
+  </div>
+</form>  
+
+     
+</ion-content>

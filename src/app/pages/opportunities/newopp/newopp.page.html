@@ -1,0 +1,159 @@
+
+<ion-buttons slot="start">
+  <br>
+  <ion-back-button  defaultHref="listopp"></ion-back-button>
+</ion-buttons>
+
+
+<ion-content> 
+  <form [formGroup]="onLoginForm" class="list-form">
+
+  
+    <div align="center">
+      <img shape="round"  style="width: 30%;border-radius: 100% ; height: 30%;"  src="assets/img/oppav.jfif"/><br><br>
+    <ion-label>Nouvelle opportunité</ion-label>
+    </div>
+    
+<br>
+
+   <ion-card>  
+    <ion-item>
+
+      <ion-label style="font-size:large" ><ion-icon style="margin-right: 7px;" name="People"></ion-icon>Prospect<ion-text color="danger">*</ion-text></ion-label>
+
+      <ionic-selectable
+      placeholder="choose prospect" formControlName="prospect" required
+        item-content 
+        [(ngModel)]="port"
+        [items]="ports"
+        itemValueField="id"
+        itemTextField="fullname"
+        [canSearch]="true"
+        headerColor="primary"
+        (onChange)="portChange($event)">
+
+        <ng-template ionicSelectableCloseButtonTemplate>
+  
+          <ion-icon name="close"></ion-icon>
+
+        </ng-template>
+
+        <ng-template ionicSelectableTitleTemplate>
+  
+choisir un prospect
+        </ng-template>
+      </ionic-selectable>
+   
+</ion-item>
+   </ion-card>
+
+ 
+   
+   <ion-card>  
+    <ion-item >
+      <ion-label style="font-size:large" position="floating"><ion-icon style="margin-right: 7px;" name="create"></ion-icon>Intitulé de l'affaire<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input placeholder="Nom d'affaire"  formControlName="nomaffaire" required  [(ngModel)]="opportunityadd.nomaffaire" required type="text"></ion-input>
+    </ion-item>
+   </ion-card>
+
+
+ 
+
+
+     
+  <ion-card>   <ion-item>
+    <ion-label style="font-size:large" ><ion-icon style="margin-right: 7px;" name="analytics"></ion-icon>Etat<ion-text color="danger">*</ion-text></ion-label>
+
+    <ion-select formControlName="etape" required  [(ngModel)]="opportunityadd.etape" >
+      <ion-select-option value="Prise de rendez vous">Prise de rendez vous</ion-select-option>
+      <ion-select-option value="Présentation du produit">Présentation du produit</ion-select-option>
+      <ion-select-option value="Démo live">Démo live</ion-select-option>
+      <ion-select-option value="POC">POC</ion-select-option>
+      <ion-select-option value="Proposition budgétaire">Proposition budgétaire</ion-select-option>
+      <ion-select-option value="AMI">AMI</ion-select-option>
+      <ion-select-option value="AO">AO</ion-select-option>
+      <ion-select-option value="Contrat">Contrat</ion-select-option>
+      <ion-select-option value="Perdu">Perdu</ion-select-option>
+    
+    </ion-select>
+  </ion-item></ion-card>
+     
+
+  <ion-card> 
+     <ion-item>
+      <ion-label style="font-size:large" ><ion-icon style="margin-right: 7px;" name="Briefcase"></ion-icon>Source d'opportunité</ion-label>
+
+    <ion-select  formControlName="source"   [(ngModel)]="opportunityadd.source">
+      <ion-select-option value="magazine">magazine </ion-select-option>
+      <ion-select-option value="event">event</ion-select-option>    
+      <ion-select-option value="autres">Autres</ion-select-option>     
+    </ion-select>
+  </ion-item></ion-card>
+
+
+
+  <ion-card>
+    <ion-item>
+      <ion-label style="font-size:large"><ion-icon style="margin-right: 7px;" name="calendar"></ion-icon>Date d'echeance</ion-label>
+      <input class="form-control" type="date"  [(ngModel)]="opportunityadd.dateecheance" formControlName="dateech"  placeholder="Select Date" />
+    </ion-item>
+  </ion-card>
+
+
+  <ion-card>  
+     <ion-item> 
+      <ion-label style="font-size:large" position="floating"><ion-icon style="margin-right: 7px;" name="create"></ion-icon>Priorité</ion-label>
+    <ion-input  formControlName="proba"  placeholder="probabilté"  [(ngModel)]="opportunityadd.proba" type="text" ></ion-input>
+  </ion-item>
+</ion-card>
+
+
+
+
+<ion-card>
+  <ion-item>
+      
+    <ion-label style="font-size:large" position="floating"><ion-icon style="margin-right: 7px;" name="Business"></ion-icon>Oraganisme</ion-label>
+    <ion-input  formControlName="societe" placeholder="societé"   [(ngModel)]="opportunityadd.societe" type="text" ></ion-input>
+  </ion-item>
+</ion-card>
+
+
+  <ion-card> <ion-item>
+    <ion-label style="font-size:large" ><ion-icon style="margin-right: 7px;" name="logo-usd"></ion-icon>Unité monétaire<ion-text color="danger"></ion-text></ion-label>
+
+    <ion-select formControlName="devise"   [(ngModel)]="opportunityadd.devise">
+      <ion-select-option value="dinnar" >Dinnar</ion-select-option>
+      <ion-select-option value="dollar" >Dollar</ion-select-option>
+      <ion-select-option value="euro" >Euro</ion-select-option>
+
+    </ion-select>
+  </ion-item></ion-card>
+
+  <ion-card> <ion-item>
+      
+    <ion-label style="font-size:large" position="floating"><ion-icon style="margin-right: 7px;" name="logo-usd"></ion-icon>Montant</ion-label>
+    <ion-input  formControlName="montant"  placeholder="montant"  [(ngModel)]="opportunityadd.montant" type="text" ></ion-input>
+  </ion-item></ion-card>
+
+
+  <ion-card> <ion-item>
+    <ion-label style="font-size:large" position="floating"><ion-icon style="margin-right: 7px;" name="document"></ion-icon>Note</ion-label>
+    <ion-textarea formControlName="brief" Placeholder="Brief"   [(ngModel)]="opportunityadd.brief"  rows="3" cols="20" ></ion-textarea>
+  </ion-item>  </ion-card>
+
+    
+       
+     
+
+
+
+<div align="center">
+  <ion-button (click)="newopp()" style=" height: 55px; width:70% ;margin:20px;"   color="dark" [disabled]="!onLoginForm.valid" tappable  no-margin><ion-icon style="margin-right: 10px;;" name="add"></ion-icon>Ajouter</ion-button>
+</div>
+
+
+</form>  
+
+     
+</ion-content>

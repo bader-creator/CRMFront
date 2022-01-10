@@ -1,0 +1,60 @@
+<br>
+<ion-buttons slot="start">
+  <ion-back-button defaultHref="listopp"></ion-back-button>
+</ion-buttons>
+
+<ion-content fullscreen class="ion-padding" scroll-y="true">
+  <ion-slides #slides pager="true" (ionSlideWillChange)="sliderChanges()">
+    <ng-container *ngFor="let etat of etatsOfOpportunity;let i=index;">
+    
+    <ion-slide style="overflow-y: scroll;">
+
+      <div class="head">
+        <div class="number-box">
+          <span>{{i+1}}</span>
+        </div>
+        <h2 style="font-size: 17px;"><span class="small">step {{i+1}}</span>{{etat}}</h2>
+      </div>
+
+      
+      <br>
+
+      <div *ngIf="listopp.length != 0 ">
+        <div *ngFor="let opp of listopp">
+          <ion-list>
+            <ion-card>
+              <ion-item class="sll" (click)="presentActionSheet(opp.id ,etat ,opp.createur.id)">
+                <ion-avatar slot="start">
+                  <img src="assets/img/oppav.jfif" class="user-avatar">
+                </ion-avatar>
+                <ion-label>
+                  <h2><strong>{{opp.nomaffaire}}</strong></h2>
+                  <ion-text>
+                    <h3>
+                      {{opp.cprospect}}
+                    </h3>
+                  </ion-text>
+                  <ion-text color="secondary">
+                    <h3>
+                      {{opp.etape}}
+                    </h3>
+                  </ion-text>
+                  <ion-text color="secondary">
+                    <h5>
+                      {{opp.createur.username}}
+                    </h5>
+                  </ion-text>
+                </ion-label>
+              </ion-item>
+
+            </ion-card>
+          </ion-list>
+        </div>
+      </div>
+
+    </ion-slide>
+
+  </ng-container>
+
+  </ion-slides>
+</ion-content>

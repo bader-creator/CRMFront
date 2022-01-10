@@ -1,0 +1,20 @@
+
+<ion-content>
+  <ion-tabs>
+ <ion-tab-bar style="background:lightgray" slot="bottom">
+   <ion-tab-button (click)="aaa()" tab="list" class="nav" style="background:lightgray" >
+     <ion-label><b>Formations</b></ion-label>      
+         
+     <ion-icon large style="  font-size: 25px; " name="list"></ion-icon><ion-badge>{{ nbformations }}</ion-badge>
+   </ion-tab-button>
+   
+   <ion-tab-button (click)="newicon()" class="nav" tab="new"  style="background:lightgray">
+     <ion-label><b>Ajout</b></ion-label>
+     <ion-icon large style="  font-size: 25px; "  [name]="addicon"></ion-icon>
+   </ion-tab-button>
+
+ </ion-tab-bar >
+
+</ion-tabs>
+
+</ion-content>

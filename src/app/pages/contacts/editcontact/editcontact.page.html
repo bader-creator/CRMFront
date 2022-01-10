@@ -1,0 +1,181 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons style=" display: block;" slot="start">
+      <ion-back-button defaultHref="listcontacts"></ion-back-button>
+    </ion-buttons>
+    <ion-title>edit contact</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="profile">
+  <ion-card no-margin>
+    <ion-card-content >
+      <img src="assets/img/av.jfif">
+    
+  
+    </ion-card-content>
+    <form [formGroup]="onLoginForm" class="list-form">
+
+    <ion-grid fixed no-padding>
+      <ion-row>
+        <ion-col size="12" padding>
+
+          <ion-list margin-bottom>
+            <ion-list-header color="light">
+              <ion-label class="fw700">Contact infos</ion-label>
+            </ion-list-header> 
+            
+            <ion-item >
+              <ion-label position="floating"><ion-icon style="margin-right: 7px;" name="person"></ion-icon>Nom&Prénom<b>*</b></ion-label>
+              <ion-input placeholder="Fullname" value="{{contactrec.fullname}}"  [(ngModel)]="updated.fullname" formControlName="fullname" required type="text"></ion-input>
+            </ion-item>
+            <p ion-text  class="text08" *ngIf="onLoginForm.get('fullname').touched && onLoginForm.get('fullname').hasError('required')">
+      
+              <ion-text color="danger">
+                Required Field
+              </ion-text>
+      
+            </p>
+  
+               
+            <ion-item>
+              <ion-label position="floating"><ion-icon style="margin-right: 7px;" name="mail"></ion-icon>Email</ion-label>
+              <ion-input placeholder="Email" value="{{contactrec.mail}}" formControlName="mail" [(ngModel)]="updated.mail" type="text"></ion-input>
+            </ion-item>
+             
+            <ion-item>
+              <ion-label position="floating"><ion-icon style="margin-right: 7px;" name="call"></ion-icon>Téléphones </ion-label>
+              <ion-input placeholder="Phone number" value="{{contactrec.tel}}" formControlName="tel"  [(ngModel)]="updated.tel" type="number"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating"><ion-icon style="margin-right: 7px;" name="business"></ion-icon>Organisme</ion-label>
+              <ion-input placeholder="organization" value="{{contactrec.organisme}}" formControlName="organisme" [(ngModel)]="updated.organisme"  type="text"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating"><ion-icon style="margin-right: 7px;" name="ribbon"></ion-icon>fonction</ion-label>
+              <ion-input placeholder="fonction" value="{{contactrec.fonction}}" formControlName="fonction" [(ngModel)]="updated.fonction" type="text"></ion-input>
+            </ion-item>
+
+            
+
+         
+ <br>
+            
+
+         
+            <ion-item>
+              <ion-label><ion-icon style="margin-right: 7px;" name="calendar"></ion-icon>Anniversaire</ion-label>
+              <input class="form-control" type="date" value="{{contactrec.dateDeNaissance}}" [(ngModel)]="updated.dateDeNaissance" formControlName="date"  placeholder="Select Date" />
+            </ion-item>
+           
+            <ion-item>
+              <ion-label position="stacked"><ion-icon name="create"></ion-icon>Commentaires</ion-label>
+              <ion-textarea formControlName="commentaire"  value="{{contactrec.commentaire}}"  placeholder="add comments" [(ngModel)]="updated.commentaire" rows="3" cols="20" ></ion-textarea>
+            </ion-item>
+             <!--
+            <ion-item>
+              <ion-label color="dark">Role</ion-label>
+              <ion-select>
+                <ion-select-option value="nes">manager</ion-select-option>
+                <ion-select-option value="n64">customer</ion-select-option>
+               
+              </ion-select>
+            </ion-item>
+    
+            -->
+           
+
+          </ion-list>
+            
+          <ion-list-header color="light">
+            <ion-label class="fw700">Adresse</ion-label>
+          </ion-list-header>
+          <ion-list>
+             
+            <ion-item>
+              <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="map"></ion-icon>Pays</ion-label>
+              <ion-input formControlName="pays"  value="{{contactrec.pays}}"  placeholder="pays" [(ngModel)]="updated.pays" type="text"></ion-input>
+            </ion-item>
+              
+              <ion-item>
+                <ion-label  position="floating"><ion-icon style="margin-right: 7px;"  name="home"></ion-icon>Adresse</ion-label>
+                <ion-input formControlName="adresse"  value="{{contactrec.adresse}}"  placeholder="address" [(ngModel)]="updated.adresse" type="text"></ion-input>
+              </ion-item>
+             
+
+          </ion-list>
+
+
+
+
+
+
+
+    <ion-list-header color="light">
+                <ion-label class="fw700">Type de Contact<b>*</b></ion-label>
+              </ion-list-header>
+          <ion-list>
+      
+            <ion-radio-group  value="{{contactrec.natureDeContact}}"  formControlName="nature" [(ngModel)]="updated.natureDeContact">
+              
+          
+              <ion-item>
+                <ion-label color="primary">agent</ion-label>
+                <ion-radio slot="start" value="agent" ></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label color="primary">Apporteur d'affaire + Partenaire</ion-label>
+                <ion-radio slot="start" value="apporteur d'affaire"></ion-radio>
+              </ion-item>
+     
+              <ion-item>
+                <ion-label color="primary">partenaire</ion-label>
+                <ion-radio slot="start" value="partenaire"></ion-radio>
+              </ion-item>
+
+              <ion-item>
+                <ion-label color="primary">client</ion-label>
+                <ion-radio slot="start" value="client"></ion-radio>
+              </ion-item>
+ 
+            </ion-radio-group>
+            <p ion-text color="dark" class="text08" *ngIf="onLoginForm.get('nature').touched && onLoginForm.get('nature').hasError('required')">
+              <ion-text color="danger">
+                Required Field
+              </ion-text>
+              </p>
+
+         
+          </ion-list>
+  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+ <ion-item>
+      <ion-label position="stacked"><ion-icon style="margin-right: 7px;" name="briefcase"></ion-icon>Type de rencontre</ion-label>
+      <ion-textarea  value="{{contactrec.cadreDeRencontre}}"  formControlName="cadreDeRencontre" placeholder="event , mission ...." [(ngModel)]="updated.cadreDeRencontre" rows="4" cols="20" ></ion-textarea>
+    </ion-item>
+
+    <p ion-text  class="text08" *ngIf="onLoginForm.get('cadreDeRencontre').touched && onLoginForm.get('cadreDeRencontre').hasError('required')">
+      
+      <ion-text color="danger">
+        Required Field
+      </ion-text>
+
+    </p>
+</form>
+   
+
+      <br>
+  
+    <ion-button (click)="update()"  size="large" expand="full" color="dark" [disabled]="!onLoginForm.valid" tappable  no-margin><ion-icon style="margin-right: 10px;;" name="checkmark"></ion-icon>edit</ion-button>
+  </ion-card>
+  
+  <div padding>
+    <ion-text color="dark" no-margin>
+      (*) required fields
+    </ion-text>
+  </div>
+</ion-content>
